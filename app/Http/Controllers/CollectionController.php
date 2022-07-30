@@ -8,30 +8,26 @@ class CollectionController extends Controller
 {
     public function index()
     {
-        $data = [
+        $data = collect([
             [
-                'name' => 'Muhammed',
-                'score' => 50,
+                'name' => 'Ahmed',
+                'age' => 25,
                 'exam' => [
-                    'math' => 10,
-                    'english' => 20
+                    'result' => 10
                 ]
             ],
             [
                 'name' => 'Ali',
-                'score' => 30,
+                'age' => 21,
                 'exam' => [
-                    'math' => 12,
-                    'english' => 25
+                    'result' => 20
                 ]
             ]
-        ];
-        $collection = collect($data);
+        ]);
 
-        $exam = array_column($data , 'exam');
-
-        dd($exam);
-
-        return max($exam);
+        return dd($data->contains(function ($val)
+        {
+            return $val['age'] < 30;
+        }));
     }
 }
